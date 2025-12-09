@@ -3,6 +3,8 @@ package com.vsuet.shoeshop.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,5 +34,11 @@ public class SaleController {
     @GetMapping
     public List<Sale> list() {
         return service.findAll();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> cleasrSales() {
+        service.clearSales();
+        return ResponseEntity.noContent().build();
     }
 }

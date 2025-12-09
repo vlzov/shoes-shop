@@ -44,4 +44,8 @@ public class SaleService {
     public List<Sale> findAll() {
         return sales.findAll();
     }
+
+    public void clearSales() {
+        sales.deleteAll();
+    }
 }
