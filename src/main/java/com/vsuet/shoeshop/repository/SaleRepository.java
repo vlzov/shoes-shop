@@ -1,5 +1,8 @@
 package com.vsuet.shoeshop.repository;
 
-public class SaleRepository {
-    
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.vsuet.shoeshop.model.Sale;
+
+public interface SaleRepository extends MongoRepository<Sale, String> {
 }
