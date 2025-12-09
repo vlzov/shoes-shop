@@ -1,71 +1,87 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Shoe Shop</title>
-</head>
+    <title>Обувной магазин — Панель управления</title>
 
+    <!-- Основная тема -->
+    <link id="themeStylesheet" rel="stylesheet" href="style.css">
+
+    <!-- Темная тема -->
+    <link rel="stylesheet" href="dark.css" disabled id="darkTheme">
+
+</head>
 <body>
 
-    <h1>Shoe Shop</h1>
+<div class="header">
+    <h1>Обувной магазин</h1>
 
-    <h2>Add Product</h2>
-    <form id="productForm">
-        <input type="text" id="pName" placeholder="Name">
-        <input type="number" id="pSize" placeholder="Size">
-        <input type="number" id="pPrice" placeholder="Price">
-        <input type="number" id="pStock" placeholder="Stock">
-        <button type="submit">Add</button>
-    </form>
+    <div class="theme-switcher">
+        <label class="switch">
+            <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
+            <span class="slider round"></span>
+        </label>
+        <span class="theme-label">Тёмная тема</span>
+    </div>
+</div>
 
-    <h2>Create Sale</h2>
-    <form id="saleForm">
-        <input type="text" id="sProductId" placeholder="Product ID">
-        <input type="number" id="sQty" placeholder="Quantity">
-        <button type="submit">Sell</button>
-    </form>
+<div class="tabs">
+    <button class="tab active" onclick="showTab('productsTab')">Товары</button>
+    <button class="tab" onclick="showTab('salesTab')">Продажи</button>
+</div>
 
-    <h2>Products</h2>
-    <button onclick="loadProducts()">Load</button>
-    <pre id="products"></pre>
+<div class="container">
 
-    <h2>Sales</h2>
-    <button onclick="loadSales()">Load</button>
-    <pre id="sales"></pre>
+    <!-- Товары -->
+    <div id="productsTab" class="tab-content active">
 
-    <script>
-        document.getElementById("productForm").onsubmit = async (e) => {
-            e.preventDefault();
-            const body = {
-                name: pName.value,
-                size: Number(pSize.value),
-                price: Number(pPrice.value),
-                stock: Number(pStock.value)
-            };
-            await fetch("/api/products", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-        };
+        <div class="card">
+            <h2>Добавить товар</h2>
 
-        document.getElementById("saleForm").onsubmit = async (e) => {
-            e.preventDefault();
-            const body = {
-                productId: sProductId.value,
-                quantity: Number(sQty.value)
-            };
-            await fetch("/api/sales", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-        };
+            <input id="pname" placeholder="Название">
+            <input id="psize" placeholder="Размер" type="number">
+            <input id="pprice" placeholder="Цена" type="number">
+            <input id="pstock" placeholder="Остаток" type="number">
 
-        async function loadProducts() {
-            const res = await fetch("/api/products");
-            products.textContent = JSON.stringify(await res.json(), null, 2);
-        }
+            <button class="primary-btn" onclick="createProduct()">Добавить товар</button>
+        </div>
 
-        async function loadSales() {
-            const res = await fetch("/api/sales");
-            sales.textContent = JSON.stringify(await res.json(), null, 2);
-        }
-    </script>
+        <div class="card">
+            <h2>Список товаров</h2>
+            <button class="primary-btn" onclick="loadProducts()">Обновить список</button>
+            <div id="products"></div>
+        </div>
+    </div>
+
+    <!-- Продажи -->
+    <div id="salesTab" class="tab-content">
+
+        <div class="card">
+            <h2>Оформить продажу</h2>
+
+            <input id="sproduct" placeholder="ID товара">
+            <input id="squantity" placeholder="Количество" type="number">
+
+            <button class="primary-btn" onclick="makeSale()">Продать</button>
+        </div>
+
+        <div class="card">
+            <h2>История продаж</h2>
+
+            <div class="row">
+                <button class="primary-btn" onclick="loadSales()">Обновить историю</button>
+                <button class="danger-btn" onclick="clearSales()">Очистить</button>
+            </div>
+
+            <div id="sales"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="themes.js"></script>
+<script src="app.js"></script>
 
 </body>
-
 </html>
