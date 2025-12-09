@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Shoe Shop</title>
+</head>
+
+<body>
+
+    <h1>Shoe Shop</h1>
+
+    <h2>Add Product</h2>
+    <form id="productForm">
+        <input type="text" id="pName" placeholder="Name">
+        <input type="number" id="pSize" placeholder="Size">
+        <input type="number" id="pPrice" placeholder="Price">
+        <input type="number" id="pStock" placeholder="Stock">
+        <button type="submit">Add</button>
+    </form>
+
+    <h2>Create Sale</h2>
+    <form id="saleForm">
+        <input type="text" id="sProductId" placeholder="Product ID">
+        <input type="number" id="sQty" placeholder="Quantity">
+        <button type="submit">Sell</button>
+    </form>
+
+    <h2>Products</h2>
+    <button onclick="loadProducts()">Load</button>
+    <pre id="products"></pre>
+
+    <h2>Sales</h2>
+    <button onclick="loadSales()">Load</button>
+    <pre id="sales"></pre>
+
+    <script>
+        document.getElementById("productForm").onsubmit = async (e) => {
+            e.preventDefault();
+            const body = {
+                name: pName.value,
+                size: Number(pSize.value),
+                price: Number(pPrice.value),
+                stock: Number(pStock.value)
+            };
+            await fetch("/api/products", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        };
+
+        document.getElementById("saleForm").onsubmit = async (e) => {
+            e.preventDefault();
+            const body = {
+                productId: sProductId.value,
+                quantity: Number(sQty.value)
+            };
+            await fetch("/api/sales", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        };
+
+        async function loadProducts() {
+            const res = await fetch("/api/products");
+            products.textContent = JSON.stringify(await res.json(), null, 2);
+        }
+
+        async function loadSales() {
+            const res = await fetch("/api/sales");
+            sales.textContent = JSON.stringify(await res.json(), null, 2);
+        }
+    </script>
+
+</body>
+
+</html>
