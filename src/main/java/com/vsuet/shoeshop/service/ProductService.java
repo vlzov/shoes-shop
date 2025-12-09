@@ -34,4 +34,12 @@ public class ProductService {
         p.setStock(p.getStock() - quantity);
         repo.save(p);
     }
+
+    public void deleteProduct(String id) {
+        if (!repo.existsById(id)) {
+            throw new RuntimeException("Товар не найден");
+        }
+        repo.deleteById(id);
+    }
+
 }
