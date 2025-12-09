@@ -1,0 +1,46 @@
+body {
+    background: #1b1e23;
+    color: #e0e0e0;
+}
+
+.header {
+    background: #252932;
+    color: #f0f0f0;
+    box-shadow: none;
+}
+
+.card {
+    background: #2c303a;
+    color: #eaeaea;
+}
+
+input {
+    background: #2c303a;
+    color: white;
+    border: 1px solid #444;
+}
+
+table th {
+    background: #353b47;
+}
+
+table td {
+    border-bottom: 1px solid #444;
+}
+
+.tab {
+    background: #3c4250;
+    color: white;
+}
+
+.tab.active {
+    background: #4a7dfc;
+}
+
+.primary-btn {
+    background: #4a7dfc;
+}
+
+.danger-btn {
+    background: #ff5252;
+}

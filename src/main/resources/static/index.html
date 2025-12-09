@@ -2,357 +2,97 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Обувной магазин</title>
+    <title>Обувной магазин — Панель управления</title>
 
-    <style>
-        :root {
-            --bg: #f3f3f3;
-            --text: #222;
-            --card: #ffffff;
-            --accent: #4a7df2;
-            --accent-dark: #3468e0;
-        }
+    <!-- Основная тема -->
+    <link id="themeStylesheet" rel="stylesheet" href="style.css">
 
-        [data-theme="dark"] {
-            --bg: #1c1c1c;
-            --text: #e0e0e0;
-            --card: #2b2b2b;
-        }
+    <!-- Темная тема -->
+    <link rel="stylesheet" href="dark.css" disabled id="darkTheme">
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            transition: 0.3s;
-        }
-
-        header {
-            padding: 20px;
-            background: var(--accent);
-            color: white;
-            font-size: 26px;
-            text-align: center;
-            letter-spacing: 1px;
-        }
-
-        .theme-switch {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            cursor: pointer;
-            background: rgba(255,255,255,0.15);
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: 0.2s;
-        }
-
-        .theme-switch:hover {
-            background: rgba(255,255,255,0.25);
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 25px auto;
-            padding: 15px;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .tab {
-            padding: 10px 25px;
-            background: var(--card);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-weight: 600;
-        }
-
-        .tab.active {
-            background: var(--accent);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .card {
-            background: var(--card);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            animation: fade 0.4s ease;
-        }
-
-        @keyframes fade {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-
-        /* Формы */
-        form {
-            display: grid;
-            gap: 12px;
-            max-width: 500px;
-        }
-
-        input {
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #aaa;
-            background: var(--bg);
-            color: var(--text);
-        }
-
-        button {
-            padding: 10px 15px;
-            border: none;
-            background: var(--accent);
-            color: white;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 15px;
-            transition: 0.25s;
-            font-weight: 600;
-        }
-
-        button:hover {
-            background: var(--accent-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-
-        button:active {
-            transform: translateY(0);
-            box-shadow: none;
-        }
-
-        /* Таблицы */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        th, td {
-            padding: 10px;
-            border-bottom: 1px solid #999;
-            text-align: left;
-        }
-
-        th {
-            background: var(--accent);
-            color: white;
-        }
-
-        /* Toast */
-        #toast {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: var(--accent);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            opacity: 0;
-            pointer-events: none;
-            transition: 0.4s;
-            font-size: 15px;
-        }
-
-        #toast.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-    </style>
 </head>
 <body>
 
-<header>Автоматизация обувного магазина</header>
+<div class="header">
+    <h1>Обувной магазин</h1>
 
-<div class="theme-switch" onclick="toggleTheme()">🌓 Тема</div>
+    <div class="theme-switcher">
+        <label class="switch">
+            <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
+            <span class="slider round"></span>
+        </label>
+        <span class="theme-label">Тёмная тема</span>
+    </div>
+</div>
+
+<div class="tabs">
+    <button class="tab active" onclick="showTab('productsTab')">Товары</button>
+    <button class="tab" onclick="showTab('salesTab')">Продажи</button>
+    <button class="tab" onclick="showTab('actionsTab')">Действия</button>
+</div>
 
 <div class="container">
 
-    <div class="tabs">
-        <div class="tab active" data-tab="products">Товары</div>
-        <div class="tab" data-tab="sales">Продажи</div>
-        <div class="tab" data-tab="addProduct">Добавить товар</div>
-        <div class="tab" data-tab="addSale">Оформить продажу</div>
+    <!-- Товары -->
+    <div id="productsTab" class="tab-content active">
+
+        <div class="card">
+            <h2>Добавить товар</h2>
+
+            <input id="pname" placeholder="Название">
+            <input id="psize" placeholder="Размер" type="number">
+            <input id="pprice" placeholder="Цена" type="number">
+            <input id="pstock" placeholder="Остаток" type="number">
+
+            <button class="primary-btn" onclick="createProduct()">Добавить товар</button>
+        </div>
+
+        <div class="card">
+            <h2>Список товаров</h2>
+            <button class="primary-btn" onclick="loadProducts()">Обновить список</button>
+            <div id="products"></div>
+        </div>
     </div>
 
-    <div id="content"></div>
+    <!-- Продажи -->
+    <div id="salesTab" class="tab-content">
+
+        <div class="card">
+            <h2>Оформить продажу</h2>
+
+            <input id="sproduct" placeholder="ID товара">
+            <input id="squantity" placeholder="Количество" type="number">
+
+            <button class="primary-btn" onclick="makeSale()">Продать</button>
+        </div>
+
+        <div class="card">
+            <h2>История продаж</h2>
+
+            <div class="row">
+                <button class="primary-btn" onclick="loadSales()">Обновить историю</button>
+                <button class="danger-btn" onclick="clearSales()">Очистить</button>
+            </div>
+
+            <div id="sales"></div>
+        </div>
+
+    </div>
+
+    <!-- Действия -->
+    <div id="actionsTab" class="tab-content">
+        <div class="card">
+            <h2>Основные действия</h2>
+
+            <button class="danger-btn" onclick="clearSales()">Очистить продажи</button>
+            <p style="margin-top:15px;">Тут можно добавить больше функций в будущем (например отчёты).</p>
+        </div>
+    </div>
+
 </div>
 
-<div id="toast"></div>
+<script src="themes.js"></script>
+<script src="app.js"></script>
 
-
-<script>
-/* ---------------------- Темы ---------------------- */
-function toggleTheme() {
-    const current = document.body.getAttribute("data-theme");
-    document.body.setAttribute("data-theme", current === "dark" ? "light" : "dark");
-}
-
-/* ---------------------- Toast ---------------------- */
-function toast(msg, error = false) {
-    const t = document.getElementById("toast");
-    t.textContent = msg;
-    t.style.background = error ? "#d9534f" : "var(--accent)";
-    t.classList.add("show");
-    setTimeout(() => t.classList.remove("show"), 2500);
-}
-
-/* ---------------------- Tabs ---------------------- */
-document.querySelectorAll(".tab").forEach(t => {
-    t.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach(el => el.classList.remove("active"));
-        t.classList.add("active");
-        loadTab(t.dataset.tab);
-    });
-});
-
-/* ---------------------- Загрузка вкладок ---------------------- */
-
-function loadTab(tab) {
-    const c = document.getElementById("content");
-
-    if (tab === "products") {
-        c.innerHTML = `
-            <div class="card">
-                <h2>Каталог товаров</h2>
-                <button onclick="loadProducts()">Обновить</button>
-                <table id="productTable"></table>
-            </div>`;
-        loadProducts();
-    }
-
-    if (tab === "sales") {
-        c.innerHTML = `
-            <div class="card">
-                <h2>История продаж</h2>
-                <button onclick="loadSales()">Обновить</button>
-                <table id="salesTable"></table>
-            </div>`;
-        loadSales();
-    }
-
-    if (tab === "addProduct") {
-        c.innerHTML = `
-            <div class="card">
-                <h2>Добавить товар</h2>
-                <form id="productForm">
-                    <input id="pName" placeholder="Название" required>
-                    <input type="number" id="pSize" placeholder="Размер" required>
-                    <input type="number" id="pPrice" placeholder="Цена" required>
-                    <input type="number" id="pStock" placeholder="Остаток" required>
-                    <button type="submit">Добавить</button>
-                </form>
-            </div>`;
-        productForm.onsubmit = addProduct;
-    }
-
-    if (tab === "addSale") {
-        c.innerHTML = `
-            <div class="card">
-                <h2>Оформить продажу</h2>
-                <form id="saleForm">
-                    <input id="sProductId" placeholder="ID товара" required>
-                    <input type="number" id="sQty" placeholder="Количество" required>
-                    <button type="submit">Продать</button>
-                </form>
-            </div>`;
-        saleForm.onsubmit = addSale;
-    }
-}
-
-/* ---------------------- API ---------------------- */
-
-async function loadProducts() {
-    const res = await fetch("/api/products");
-    const data = await res.json();
-
-    const tbl = document.getElementById("productTable");
-    tbl.innerHTML = `
-        <tr><th>ID</th><th>Название</th><th>Размер</th><th>Цена</th><th>Остаток</th></tr>
-        ${data.map(p => `
-            <tr>
-                <td>${p.id}</td>
-                <td>${p.name}</td>
-                <td>${p.size}</td>
-                <td>${p.price}</td>
-                <td>${p.stock}</td>
-            </tr>`).join("")}
-    `;
-}
-
-async function loadSales() {
-    const res = await fetch("/api/sales");
-    const data = await res.json();
-
-    const tbl = document.getElementById("salesTable");
-    tbl.innerHTML = `
-        <tr><th>ID</th><th>ID товара</th><th>Кол-во</th><th>Сумма</th><th>Дата</th></tr>
-        ${data.map(s => `
-            <tr>
-                <td>${s.id}</td>
-                <td>${s.productId}</td>
-                <td>${s.quantity}</td>
-                <td>${s.totalPrice}</td>
-                <td>${new Date(s.timestamp).toLocaleString("ru-RU")}</td>
-            </tr>`).join("")}
-    `;
-}
-
-async function addProduct(e) {
-    e.preventDefault();
-    const body = {
-        name: pName.value,
-        size: Number(pSize.value),
-        price: Number(pPrice.value),
-        stock: Number(pStock.value)
-    };
-
-    const res = await fetch("/api/products", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(body)
-    });
-
-    toast(res.ok ? "Товар добавлен" : "Ошибка добавления", !res.ok);
-
-    if (res.ok) e.target.reset();
-}
-
-async function addSale(e) {
-    e.preventDefault();
-    const body = {
-        productId: sProductId.value,
-        quantity: Number(sQty.value)
-    };
-
-    const res = await fetch("/api/sales", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(body)
-    });
-
-    const ok = res.ok;
-    const msg = ok ? "Продажа оформлена" : (await res.json()).error;
-
-    toast(msg, !ok);
-
-    if (ok) e.target.reset();
-}
-
-/* Загружаем первую вкладку */
-loadTab("products");
-
-</script>
 </body>
 </html>
