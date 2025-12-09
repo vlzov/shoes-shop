@@ -1,4 +1,4 @@
-# 👟 Обувной магазин — Панель управления
+<img width="1461" height="831" alt="Снимок экрана 2025-12-09 в 16 43 33" src="https://github.com/user-attachments/assets/70e631c2-ffb9-404d-99b4-c5ab1379750b" /><img width="1468" height="832" alt="Снимок экрана 2025-12-09 в 16 43 20" src="https://github.com/user-attachments/assets/1e228bd1-4134-41e5-910d-3885e56b13ae" /># 👟 Обувной магазин — Панель управления
 
 **Минималистичная автоматизация для магазина обуви с современным интерфейсом и REST API на Spring Boot.**
 
@@ -91,37 +91,100 @@ mvn spring-boot:run
 
 ## 📂 Структура проекта
 
-shoeshop/  
-├─ src/  
-│ ├─ main/  
-│ │ ├─ java/com/example/shoeshop/  
-│ │ │ ├─ Application.java  
-│ │ │ ├─ model/  
-│ │ │ ├─ repository/  
-│ │ │ ├─ service/  
-│ │ │ ├─ controller/  
-│ │ │ └─ exception/  
-│ │ └─ resources/  
-│ │ ├─ application.properties  
-│ │ └─ static/  
-│ │ ├─ index.html  
-│ │ ├─ styles/  
-│ │ │ └─ style.css  
-│ │ └─ js/  
-│ │ ├─ api.js  
-│ │ ├─ ui.js  
-│ │ └─ logic.js  
-├─ pom.xml  
-└─ README.md  
+```
+shoeshop/
+├─ src/
+│ ├─ main/
+│ │ ├─ java/com/example/shoeshop/
+│ │ │ ├─ Application.java                    # Главный класс приложения
+│ │ │ ├─ model/                              # Модели данных (сущности)
+│ │ │ ├─ repository/                         # Репозитории (Data JPA)
+│ │ │ ├─ service/                            # Бизнес-логика
+│ │ │ ├─ controller/                         # REST контроллеры
+│ │ │ └─ exception/                          # Кастомные исключения
+│ │ └─ resources/
+│ │   ├─ application.properties              # Конфигурация приложения
+│ │   └─ static/
+│ │     ├─ index.html                        # Главная страница
+│ │     ├─ styles/
+│ │     │ └─ style.css                       # Стили CSS
+│ │     └─ js/
+│ │       ├─ api.js                          # Работа с API
+│ │       ├─ ui.js                           # Управление интерфейсом
+│ │       └─ logic.js                        # Бизнес-логика фронтенда
+├─ pom.xml                                   # Конфигурация Maven
+└─ README.md                                 # Документация проекта
+```
 
+## Описание папок
+
+### `/src/main/java/com/example/shoeshop/`
+- **`Application.java`** - точка входа Spring Boot приложения
+- **`model/`** - содержит JPA-сущности (Shoe, Order, User и т.д.)
+- **`repository/`** - интерфейсы Spring Data JPA для доступа к данным
+- **`service/`** - слой бизнес-логики, сервисные классы
+- **`controller/`** - REST контроллеры для обработки HTTP-запросов
+- **`exception/`** - кастомные исключения и глобальный обработчик ошибок
+
+### `/src/main/resources/`
+- **`application.properties`** - настройки базы данных, порт сервера и др.
+- **`static/`** - статические файлы фронтенда
+  - **`index.html`** - главная HTML-страница
+  - **`styles/style.css`** - таблица стилей
+  - **`js/`** - JavaScript файлы
+    - `api.js` - функции для взаимодействия с backend API
+    - `ui.js` - обновление DOM и обработка событий
+    - `logic.js` - основная логика фронтенда
+
+## Технологии
+
+- **Backend:** Spring Boot, Spring Data JPA, Spring Web
+- **Frontend:** HTML, CSS, JavaScript (ES6+)
+- **База данных:** (укажите вашу БД, например: PostgreSQL/MySQL/H2)
+- **Сборка:** Maven
+- **Java:** 11+
+
+## Запуск приложения
+
+1. Клонировать репозиторий
+```bash
+git clone https://github.com/yourusername/shoeshop.git
+```
+
+2. Перейти в директорию проекта
+```bash
+cd shoeshop
+```
+
+3. Настроить базу данных в `application.properties`
+
+4. Собрать и запустить приложение
+```bash
+mvn spring-boot:run
+```
+
+5. Открыть в браузере: [http://localhost:8080](http://localhost:8080)
+
+## API Endpoints
+
+| Метод | Endpoint | Описание |
+|-------|----------|----------|
+| GET | `/api/shoes` | Получить все товары |
+| GET | `/api/shoes/{id}` | Получить товар по ID |
+| POST | `/api/shoes` | Добавить новый товар |
+| PUT | `/api/shoes/{id}` | Обновить товар |
+| DELETE | `/api/shoes/{id}` | Удалить товар |
 
 ## 🎨 Скриншоты
 
 ### Светлая тема
-*(добавьте скриншот интерфейса в светлой теме)*
+<img width="1468" height="832" alt="Снимок экрана 2025-12-09 в 16 43 20" src="https://github.com/user-attachments/assets/615d5df0-504e-4c72-9ad2-a1a7ca107ba1" />
+<img width="1468" height="836" alt="Снимок экрана 2025-12-09 в 16 43 48" src="https://github.com/user-attachments/assets/2be6548b-9642-4ba8-9ef7-47c8095f202c" />
+
 
 ### Тёмная тема
-*(добавьте скриншот интерфейса в тёмной теме)*
+<img width="1461" height="831" alt="Снимок экрана 2025-12-09 в 16 43 33" src="https://github.com/user-attachments/assets/9e578b1e-d2ea-4f1f-9d13-0ec08441cadc" />
+<img width="1468" height="836" alt="Снимок экрана 2025-12-09 в 16 43 57" src="https://github.com/user-attachments/assets/517993cd-18d6-4aa2-8042-fa6c91eadf56" />
 
 ## 💡 Возможности для расширения
 
