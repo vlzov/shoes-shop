@@ -91,28 +91,28 @@ mvn spring-boot:run
 
 ## 📂 Структура проекта
 
-shoeshop/
-├─ src/
-│ ├─ main/
-│ │ ├─ java/com/example/shoeshop/
-│ │ │ ├─ Application.java
-│ │ │ ├─ model/
-│ │ │ ├─ repository/
-│ │ │ ├─ service/
-│ │ │ ├─ controller/
-│ │ │ └─ exception/
-│ │ └─ resources/
-│ │ ├─ application.properties
-│ │ └─ static/
-│ │ ├─ index.html
-│ │ ├─ styles/
-│ │ │ └─ style.css
-│ │ └─ js/
-│ │ ├─ api.js
-│ │ ├─ ui.js
-│ │ └─ logic.js
-├─ pom.xml
-└─ README.md
+shoeshop/  
+├─ src/  
+│ ├─ main/  
+│ │ ├─ java/com/example/shoeshop/  
+│ │ │ ├─ Application.java  
+│ │ │ ├─ model/  
+│ │ │ ├─ repository/  
+│ │ │ ├─ service/  
+│ │ │ ├─ controller/  
+│ │ │ └─ exception/  
+│ │ └─ resources/  
+│ │ ├─ application.properties  
+│ │ └─ static/  
+│ │ ├─ index.html  
+│ │ ├─ styles/  
+│ │ │ └─ style.css  
+│ │ └─ js/  
+│ │ ├─ api.js  
+│ │ ├─ ui.js  
+│ │ └─ logic.js  
+├─ pom.xml  
+└─ README.md  
 
 
 ## 🎨 Скриншоты
